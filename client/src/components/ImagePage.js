@@ -1,8 +1,10 @@
+import { Container } from 'react-bootstrap'
+
 const ImagePage = () => {
   return(
-    <div>
+    <Container>
       Hi
-    </div>
+    </Container>
   )
 }
 
