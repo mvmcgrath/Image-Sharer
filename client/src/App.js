@@ -29,7 +29,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={ user === null ? <Login /> : <Navigate to="/user" />} />
           <Route path="/register" element={ user === null ? <Register /> : <Navigate to="/user" />} />
-          <Route path="/userlist" element={ <UserList /> } />
+          <Route path="/users" element={ <UserList /> } />
           <Route path="/user/:userId" element={ <User user={user} />} />
           <Route path="/image/:imageId" element={ <ImagePage user={user} />} />
           <Route path="/user/:userId/image/:imageId" element={ <Redirect />} />

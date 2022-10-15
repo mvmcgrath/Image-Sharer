@@ -20,7 +20,7 @@ const Navigation = ({ user }) => {
               <StyledLink to="/">Home</StyledLink>
             </Nav.Link>
             <Nav.Link href="#" as="span">
-              <StyledLink to="/userlist">Users</StyledLink>
+              <StyledLink to="/users">Users</StyledLink>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
