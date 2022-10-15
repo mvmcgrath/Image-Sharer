@@ -3,7 +3,7 @@ import Register from './components/Register'
 import Login from './components/Login'
 import Navigation from './components/Navigation'
 import User from './components/User'
-import Image from './components/Image'
+import ImagePage from './components/ImagePage'
 import UserList from './components/UserList'
 
 import { Routes, Route, Navigate } from 'react-router-dom'
@@ -23,7 +23,7 @@ const App = () => {
   return (
     <div>
       <Navigation user={user} />
-      <div className="container">
+      <div>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={ user === null ? <Login /> : <Navigate to="/user" />} />
@@ -31,7 +31,7 @@ const App = () => {
           <Route path="/userlist" element={ <UserList /> } />
           <Route path="/user" element={ user === null ? <Navigate to="/login" />: <User user={user} />} />
           <Route path="/user/:userId" element={ <User user={user} />} />
-          <Route path="/user/:userId/:imageId" element={ <Image user={user} />} />
+          <Route path="/image/:imageId" element={ <ImagePage user={user} />} />
         </Routes>
       </div>
     </div>
