@@ -34,21 +34,23 @@ const UserList = () => {
   }, [])
 
   return (
-    <StyledContainer className="bg-dark">
-      <h1>Users</h1>
-      <StyledTable className="w-50 rounded">
-        <tbody>
-          {users.map(user =>
-            <tr key={user.id}>
-              <td>
-                <StyledLink to={`../user/${user.id}`}>
-                  {user.username}
-                </StyledLink>
-              </td>
-            </tr>)}
-        </tbody>
-      </StyledTable>
-    </StyledContainer>
+    <Container>
+      <StyledContainer className="w-75 bg-dark">
+        <h1>Users</h1>
+        <StyledTable className="w-50 rounded">
+          <tbody>
+            {users.map(user =>
+              <tr key={user.id}>
+                <td>
+                  <StyledLink to={`../user/${user.id}`}>
+                    {user.username}
+                  </StyledLink>
+                </td>
+              </tr>)}
+          </tbody>
+        </StyledTable>
+      </StyledContainer>
+    </Container>
   )
 }
 

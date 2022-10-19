@@ -12,30 +12,30 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/images/")
 public class ImageController {
 
     @Autowired
     private ImageRepository imageRepository;
 
-    @GetMapping("/images")
+    @GetMapping("/")
     public List<Image> getAllImages() {
         return imageRepository.findAll();
     }
 
-    @PostMapping("/images")
+    @PostMapping("/")
     public Image createImage(@RequestBody Image image) {
         return imageRepository.save(image);
     }
 
-    @GetMapping("/images/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Image> getImageById(@PathVariable Long id) {
         Image image = imageRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("An image does not exist with id: " + id));
         return ResponseEntity.ok(image);
     }
 
-    @PutMapping("/images/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Image> updateImage(@PathVariable Long id, @RequestBody Image imageDetails) {
         Image image = imageRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("An image does not exist with id: " + id));
@@ -47,7 +47,7 @@ public class ImageController {
         return ResponseEntity.ok(updatedImage);
     }
 
-    @DeleteMapping("/images/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, Boolean>> deleteImage(@PathVariable Long id) {
         Image image = imageRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Image does not exist with id: " + id));
