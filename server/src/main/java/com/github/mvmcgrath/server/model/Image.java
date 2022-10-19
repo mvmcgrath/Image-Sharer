@@ -7,8 +7,13 @@ import javax.persistence.*;
 public class Image {
 
     @Id
+    @Column(name="imageId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long imageId;
+
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private User user;
 
     @Column(name = "title")
     private String title;
@@ -20,16 +25,19 @@ public class Image {
 
     }
 
-    public Image(long id, String title, String image) {
+    public Image(long imageId, User user, String title, String image) {
         super();
-        this.id = id;
+        this.imageId = imageId;
+        this.user = user;
         this.title = title;
         this.image = image;
     }
 
-    public long getId() {
-        return id;
+    public long getImageId() {
+        return imageId;
     }
+
+    public User getUser() { return user; }
 
     public String getTitle() {
         return title;
@@ -39,16 +47,16 @@ public class Image {
         return image;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setImageId(long imageId) {
+        this.imageId = imageId;
     }
+
+    public void setUser() { this.user = user; }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public void setImage(String image) {
-        this.image = image;
-    }
+    public void setImage(String image) { this.image = image; }
 }
 
