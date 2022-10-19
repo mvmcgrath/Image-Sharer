@@ -25,7 +25,6 @@ public class ImageController {
 
     @PostMapping("/images")
     public Image createImage(@RequestBody Image image) {
-        // This image needs to be cleaned and converted to byte
         return imageRepository.save(image);
     }
 

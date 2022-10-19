@@ -13,15 +13,14 @@ public class Image {
     @Column(name = "title")
     private String title;
 
-    @Lob
     @Column(name = "image", length=100000)
-    private byte[] image;
+    private String image;
 
     public Image() {
 
     }
 
-    public Image(long id, String title, byte[] image) {
+    public Image(long id, String title, String image) {
         super();
         this.id = id;
         this.title = title;
@@ -36,7 +35,7 @@ public class Image {
         return title;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
@@ -48,7 +47,7 @@ public class Image {
         this.title = title;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 }
