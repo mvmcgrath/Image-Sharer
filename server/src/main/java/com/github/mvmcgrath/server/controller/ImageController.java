@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/")
 public class ImageController {
@@ -26,6 +25,7 @@ public class ImageController {
 
     @PostMapping("/images")
     public Image createImage(@RequestBody Image image) {
+        // This image needs to be cleaned and converted to byte
         return imageRepository.save(image);
     }
 

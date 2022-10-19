@@ -22,6 +22,9 @@ const Navigation = ({ user }) => {
             <Nav.Link href="#" as="span">
               <StyledLink to="/users">Users</StyledLink>
             </Nav.Link>
+            <Nav.Link href="#" as="span">
+              <StyledLink to="/upload">Upload</StyledLink>
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
         <Navbar className="justify-content-end">
