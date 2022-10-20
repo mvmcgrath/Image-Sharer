@@ -1,6 +1,8 @@
 import { Container, Image, Button, Form } from 'react-bootstrap'
 import styled from 'styled-components'
-import logo from '../assets/logo512.png'
+import { useState, useEffect } from 'react'
+import imageService from '../services/image'
+import { useParams, useNavigate } from 'react-router-dom'
 
 const StyledContainer = styled(Container)`
   margin-top: 50px;
@@ -32,20 +34,46 @@ const FormDiv = styled(StyledDiv)`
 `
 
 const ImagePage = () => {
+  const id = useParams().imageId
+  const navigate = useNavigate()
+  const [image, setImage] = useState(null)
+  const [title, setTitle] = useState('')
 
-  const onUpdate = (event) => {
+  useEffect(() => {
+    imageService.getImage(id).then(returnedImage => {
+      setImage(returnedImage)
+    })
+  }, [])
+
+  const onUpdate = async (event) => {
     event.preventDefault()
+    try {
+      await imageService.updateImage(id, { ...image, title: title })
+      setImage({ ...image, title: title })
+    } catch (exception) {
+      console.log(exception)
+    }
   }
 
-  const onDelete = (event) => {
-    event.preventDefault()
-    console.log(logo)
+  const onDelete = async () => {
+    try {
+      await imageService.deleteImage(id)
+      navigate('/')
+    } catch (exception) {
+      console.log(exception)
+    }
+  }
+
+  if (!image) {
+    return(
+      <StyledContainer className="bg-dark" />
+    )
   }
 
   return(
     <StyledContainer className="bg-dark">
-      <h1>Image Title</h1>
-      <StyledImage src={logo} />
+      <h1>{image.title}</h1>
+      <StyledImage src={image.image} />
       <StyledDiv>
         <Form onSubmit={onUpdate}>
           <Form.Group>
@@ -54,6 +82,7 @@ const ImagePage = () => {
               <Form.Control
                 type="text"
                 name="title"
+                onChange={({ target }) => setTitle(target.value)}
               />
               <Button variant="primary" type="submit">
               Update

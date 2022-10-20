@@ -1,6 +1,5 @@
 package com.github.mvmcgrath.server.controller;
 
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +32,7 @@ public class ImageController {
     public ResponseEntity<Image> getImageById(@PathVariable Long id) {
         Image image = imageRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("An image does not exist with id: " + id));
-        
+
         return ResponseEntity.ok(image);
     }
 

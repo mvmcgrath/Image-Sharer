@@ -2,6 +2,7 @@ import { Container, Form, Button } from 'react-bootstrap'
 import styled from 'styled-components'
 import { useState } from 'react'
 import imageService from '../services/image'
+import { useNavigate } from 'react-router-dom'
 
 const StyledDiv = styled.div`
   width: 600px;
@@ -20,6 +21,7 @@ const StyledVerticalFlex = styled.div`
 `
 
 const Upload = () => {
+  const navigate = useNavigate()
   const [title, setTitle] = useState('')
   const [image, setImage] = useState('')
 
@@ -34,10 +36,9 @@ const Upload = () => {
     fileReader.readAsDataURL(image)
 
     fileReader.onload = async () => {
-      await imageService.uploadImage({ image: fileReader.result, title })
+      const response = await imageService.uploadImage({ image: fileReader.result, title })
+      navigate(`/image/${response.imageId}`)
     }
-    console.log(image)
-    console.log(title)
   }
 
   return (

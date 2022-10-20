@@ -11,8 +11,6 @@ const StyledLink = styled(Link)`
 `
 
 const Image = ({ images }) => {
-  console.log(images)
-
   return (
     <Row xs={1} md={5} className="g-4">
       {images.map((img) =>

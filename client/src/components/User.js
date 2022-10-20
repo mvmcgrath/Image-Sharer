@@ -19,7 +19,7 @@ const User = () => {
 
   useEffect(() => {
     imageService.getAllImages().then(returnedImages => {
-      setImages(returnedImages.filter(img => img.id === id))
+      setImages(returnedImages.filter(img => img.userId === id))
     })
   }, [])
 
