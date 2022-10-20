@@ -1,5 +1,6 @@
 package com.github.mvmcgrath.server.controller;
 
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,30 +13,31 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/images/")
+@RequestMapping("/api/")
 public class ImageController {
 
     @Autowired
     private ImageRepository imageRepository;
 
-    @GetMapping("/")
+    @GetMapping("/images")
     public List<Image> getAllImages() {
         return imageRepository.findAll();
     }
 
-    @PostMapping("/")
+    @PostMapping("/images")
     public Image createImage(@RequestBody Image image) {
         return imageRepository.save(image);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/images/{id}")
     public ResponseEntity<Image> getImageById(@PathVariable Long id) {
         Image image = imageRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("An image does not exist with id: " + id));
+        
         return ResponseEntity.ok(image);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/images/{id}")
     public ResponseEntity<Image> updateImage(@PathVariable Long id, @RequestBody Image imageDetails) {
         Image image = imageRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("An image does not exist with id: " + id));
@@ -47,7 +49,7 @@ public class ImageController {
         return ResponseEntity.ok(updatedImage);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/images/{id}")
     public ResponseEntity<Map<String, Boolean>> deleteImage(@PathVariable Long id) {
         Image image = imageRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Image does not exist with id: " + id));

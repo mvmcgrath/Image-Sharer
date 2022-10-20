@@ -26,7 +26,7 @@ const Upload = () => {
   const onSubmit = (event) => {
     event.preventDefault()
 
-    if (!(/^image/.test(image.type))) {
+    if (!(/^image\/png/.test(image.type) || /^image\/jpg/.test(image.type))) {
       console.log('Not an image!')
     }
 

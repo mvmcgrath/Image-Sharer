@@ -39,6 +39,7 @@ const ImagePage = () => {
 
   const onDelete = (event) => {
     event.preventDefault()
+    console.log(logo)
   }
 
   return(

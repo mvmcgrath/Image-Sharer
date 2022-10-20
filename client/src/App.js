@@ -5,7 +5,6 @@ import Navigation from './components/Navigation'
 import User from './components/User'
 import ImagePage from './components/ImagePage'
 import UserList from './components/UserList'
-import Redirect from './components/Redirect'
 import Upload from './components/Upload'
 
 import { Routes, Route, Navigate } from 'react-router-dom'
@@ -33,7 +32,6 @@ const App = () => {
           <Route path="/users" element={ <UserList /> } />
           <Route path="/user/:userId" element={ <User user={user} />} />
           <Route path="/image/:imageId" element={ <ImagePage user={user} />} />
-          <Route path="/user/:userId/image/:imageId" element={ <Redirect />} />
           <Route path="/upload" element={ user !== null ? <Navigate to="/login" /> : <Upload />} />
         </Routes>
       </div>

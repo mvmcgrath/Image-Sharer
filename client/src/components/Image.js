@@ -11,11 +11,13 @@ const StyledLink = styled(Link)`
 `
 
 const Image = ({ images }) => {
+  console.log(images)
+
   return (
     <Row xs={1} md={5} className="g-4">
       {images.map((img) =>
-        <Col key={img.id}>
-          <StyledLink to={`image/${img.id}`}>
+        <Col key={img.imageId}>
+          <StyledLink to={`/image/${img.imageId}`}>
             <StyledCard bg="dark">
               <Card.Img variant="top" src={img.image} />
               <Card.Body>

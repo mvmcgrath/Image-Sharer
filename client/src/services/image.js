@@ -6,4 +6,9 @@ const uploadImage = async (newObject) => {
   return response.data
 }
 
-export default { uploadImage }
+const getAllImages = async () => {
+  const response = await axios.get(baseUrl)
+  return response.data
+}
+
+export default { uploadImage, getAllImages }
