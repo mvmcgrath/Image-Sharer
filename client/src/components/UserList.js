@@ -2,6 +2,7 @@ import { Container, Table } from 'react-bootstrap'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import userService from '../services/user'
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -30,7 +31,9 @@ const UserList = () => {
   const [users, setUsers] = useState([])
 
   useEffect(() => {
-    setUsers([{ username: 'Bob Bob', id: 1 }, { username: 'Bob Bob', id: 2 }, { username: 'Bob Bob', id: 3 }])
+    userService.getAll().then(returnedUsers => {
+      setUsers(returnedUsers)
+    })
   }, [])
 
   return (
@@ -40,9 +43,9 @@ const UserList = () => {
         <StyledTable className="w-50 rounded">
           <tbody>
             {users.map(user =>
-              <tr key={user.id}>
+              <tr key={user.userId}>
                 <td>
-                  <StyledLink to={`../user/${user.id}`}>
+                  <StyledLink to={`/user/${user.userId}`}>
                     {user.username}
                   </StyledLink>
                 </td>
