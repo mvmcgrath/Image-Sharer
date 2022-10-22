@@ -11,10 +11,6 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long imageId;
 
-    @ManyToOne
-    @JoinColumn(name = "userId")
-    private User user;
-
     @Column(name = "title")
     private String title;
 
@@ -25,10 +21,9 @@ public class Image {
 
     }
 
-    public Image(long imageId, User user, String title, String image) {
+    public Image(long imageId, String title, String image) {
         super();
         this.imageId = imageId;
-        this.user = user;
         this.title = title;
         this.image = image;
     }
@@ -36,8 +31,6 @@ public class Image {
     public long getImageId() {
         return imageId;
     }
-
-    public User getUser() { return user; }
 
     public String getTitle() {
         return title;
@@ -50,8 +43,6 @@ public class Image {
     public void setImageId(long imageId) {
         this.imageId = imageId;
     }
-
-    public void setUser() { this.user = user; }
 
     public void setTitle(String title) {
         this.title = title;
