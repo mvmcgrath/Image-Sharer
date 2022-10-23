@@ -32,7 +32,7 @@ const Upload = ({ user }) => {
     fileReader.readAsDataURL(image)
 
     fileReader.onload = async () => {
-      if (fileReader.result.length <= 10000000 && ((/^image\/png/.test(image.type) || /^image\/jpg/.test(image.type)))) {
+      if (fileReader.result.length <= 10000000 && /^image\//.test(image.type)) {
         const response = await imageService.uploadImage({ image: fileReader.result, title, userId: user.userId })
         navigate(`/image/${response.imageId}`)
       }
