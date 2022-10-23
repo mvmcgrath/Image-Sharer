@@ -33,7 +33,7 @@ const FormDiv = styled(StyledDiv)`
   gap: 5px;
 `
 
-const ImagePage = () => {
+const ImagePage = ({ user }) => {
   const id = useParams().imageId
   const navigate = useNavigate()
   const [image, setImage] = useState(null)
@@ -47,20 +47,25 @@ const ImagePage = () => {
 
   const onUpdate = async (event) => {
     event.preventDefault()
-    try {
-      await imageService.updateImage(id, { ...image, title: title })
-      setImage({ ...image, title: title })
-    } catch (exception) {
-      console.log(exception)
+
+    if (user && user.userId === image.userId) {
+      try {
+        await imageService.updateImage(id, { ...image, title: title })
+        setImage({ ...image, title: title })
+      } catch (exception) {
+        console.log(exception)
+      }
     }
   }
 
   const onDelete = async () => {
-    try {
-      await imageService.deleteImage(id)
-      navigate('/')
-    } catch (exception) {
-      console.log(exception)
+    if (user && user.userId === image.userId) {
+      try {
+        await imageService.deleteImage(id)
+        navigate('/')
+      } catch (exception) {
+        console.log(exception)
+      }
     }
   }
 
@@ -74,7 +79,7 @@ const ImagePage = () => {
     <StyledContainer className="bg-dark">
       <h1>{image.title}</h1>
       <StyledImage src={image.image} />
-      <StyledDiv>
+      {user && user.userId === image.userId && <StyledDiv>
         <Form onSubmit={onUpdate}>
           <Form.Group>
             <FormDiv>
@@ -93,7 +98,7 @@ const ImagePage = () => {
         <Button variant="primary" onClick={onDelete}>
           Delete
         </Button>
-      </StyledDiv>
+      </StyledDiv>}
     </StyledContainer>
   )
 }

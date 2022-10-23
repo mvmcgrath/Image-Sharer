@@ -20,7 +20,7 @@ const StyledVerticalFlex = styled.div`
   margin-top: 50px;
 `
 
-const Upload = () => {
+const Upload = ({ user }) => {
   const navigate = useNavigate()
   const [title, setTitle] = useState('')
   const [image, setImage] = useState('')
@@ -36,8 +36,10 @@ const Upload = () => {
     fileReader.readAsDataURL(image)
 
     fileReader.onload = async () => {
-      const response = await imageService.uploadImage({ image: fileReader.result, title })
-      navigate(`/image/${response.imageId}`)
+      if (fileReader.result.length <= 100000) {
+        const response = await imageService.uploadImage({ image: fileReader.result, title, userId: user.userId })
+        navigate(`/image/${response.imageId}`)
+      }
     }
   }
 

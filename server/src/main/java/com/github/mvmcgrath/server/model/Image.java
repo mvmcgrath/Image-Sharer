@@ -11,9 +11,12 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long imageId;
 
-    @ManyToOne
-    @JoinColumn(name = "userId", nullable = false)
+    @ManyToOne(targetEntity = UserDAO.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "userId", insertable = false, updatable = false)
     private UserDAO user;
+
+    @Column(name = "userId")
+    private Long userId;
 
     @Column(name = "title", nullable = false)
     private String title;
@@ -25,20 +28,20 @@ public class Image {
 
     }
 
-    public Image(long imageId, UserDAO user, String title, String image) {
+    public Image(long imageId, long userId, String title, String image) {
         super();
         this.imageId = imageId;
-        this.user = user;
+        this.userId = userId;
         this.title = title;
         this.image = image;
     }
 
-    public UserDAO getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(UserDAO user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public long getImageId() {

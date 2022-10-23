@@ -4,6 +4,7 @@ import Image from './Image'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 import imageService from '../services/image'
+import userService from '../services/user'
 
 const StyledHeader = styled.div`
   color: white;
@@ -16,18 +17,23 @@ const StyledHeader = styled.div`
 const User = () => {
   const id = useParams().userId
   const [images, setImages] = useState([])
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
     imageService.getAllImages().then(returnedImages => {
-      setImages(returnedImages.filter(img => img.userId === id))
+      setImages(returnedImages.filter(img => img.userId === parseInt(id)))
+    })
+
+    userService.getUser(id).then(returnedUser => {
+      setUser(returnedUser)
     })
   }, [])
 
   return(
     <Container>
-      <StyledHeader>
-        <h1>Users Images</h1>
-      </StyledHeader>
+      {user && <StyledHeader>
+        <h1>{user.username}&#39;s images</h1>
+      </StyledHeader>}
       <Image images={images} />
     </Container>
   )

@@ -4,7 +4,7 @@ const baseUrl = '/api/images'
 let token = null
 
 const setToken = newToken => {
-  token = `bearer ${newToken}`
+  token = `Bearer ${newToken}`
 }
 
 const uploadImage = async (newImage) => {

@@ -52,7 +52,7 @@ const App = () => {
           <Route path="/users" element={ <UserList /> } />
           <Route path="/user/:userId" element={ <User user={user} />} />
           <Route path="/image/:imageId" element={ <ImagePage user={user} />} />
-          <Route path="/upload" element={ user !== null ? <Navigate to="/login" /> : <Upload />} />
+          <Route path="/upload" element={ user !== null ? <Upload user={user}/> : <Navigate to="/login" />} />
         </Routes>
       </div>
     </div>
