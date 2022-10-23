@@ -12,9 +12,9 @@ public class UserDAO {
     @Column(name="userId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
-    @Column(name="username")
+    @Column(name="username", nullable = false, unique = true)
     private String username;
-    @Column(name="password")
+    @Column(name="password", nullable = false)
     @JsonIgnore
     private String password;
 

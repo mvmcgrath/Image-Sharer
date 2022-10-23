@@ -1,4 +1,4 @@
-import { Navbar, Nav, Container } from 'react-bootstrap'
+import { Navbar, Nav, Container, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -9,7 +9,18 @@ const StyledLink = styled(Link)`
   font-size: 1.3rem;
 `
 
-const Navigation = ({ user }) => {
+const StyledName = styled.span`
+  color: white;
+  margin-right: 30px;
+  font-size: 1.3rem;
+`
+
+const StyledDiv = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+const Navigation = ({ user, handleLogout }) => {
   return(
     <Navbar collapseOnSelect expand="xxl" bg="dark" variant="dark">
       <Container>
@@ -30,7 +41,11 @@ const Navigation = ({ user }) => {
         <Navbar className="justify-content-end">
           <Nav.Link className="justify-content-end" href="#" as="span">
             {user
-              ? <em>{user.name}</em>
+              ?
+              <StyledDiv>
+                <StyledName>{user.username}</StyledName>
+                <Button onClick={handleLogout}>Logout</Button>
+              </StyledDiv>
               : <StyledLink to="/login">Login</StyledLink>
             }
           </Nav.Link>

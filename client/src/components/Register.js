@@ -1,5 +1,8 @@
 import { Container, Form, Button } from 'react-bootstrap'
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import registerService from '../services/register'
 
 const StyledDiv = styled.div`
   width: 600px;
@@ -18,8 +21,22 @@ const StyledVerticalFlex = styled.div`
 `
 
 const Register = () => {
-  const onSubmit = (event) => {
+  const navigate = useNavigate()
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+
+  const onSubmit = async (event) => {
     event.preventDefault()
+
+    try {
+      await registerService.register({
+        username,
+        password
+      })
+      navigate('/login')
+    } catch (exception) {
+      console.error(exception)
+    }
   }
 
   return(
@@ -34,12 +51,15 @@ const Register = () => {
                   <Form.Control
                     type="text"
                     name="username"
+                    onChange={({ target }) => setUsername(target.value)}
                   />
                 </div>
                 <div>
                   <Form.Label>Password:</Form.Label>
                   <Form.Control
                     type="password"
+                    name="password"
+                    onChange={({ target }) => setPassword(target.value)}
                   />
                 </div>
                 <Button variant="primary" type="submit">
