@@ -28,15 +28,11 @@ const Upload = ({ user }) => {
   const onSubmit = (event) => {
     event.preventDefault()
 
-    if (!(/^image\/png/.test(image.type) || /^image\/jpg/.test(image.type))) {
-      console.log('Not an image!')
-    }
-
     const fileReader = new FileReader()
     fileReader.readAsDataURL(image)
 
     fileReader.onload = async () => {
-      if (fileReader.result.length <= 100000) {
+      if (fileReader.result.length <= 10000000 && ((/^image\/png/.test(image.type) || /^image\/jpg/.test(image.type)))) {
         const response = await imageService.uploadImage({ image: fileReader.result, title, userId: user.userId })
         navigate(`/image/${response.imageId}`)
       }

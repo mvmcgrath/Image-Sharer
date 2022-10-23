@@ -21,7 +21,7 @@ public class Image {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "image", length=100000, nullable = false)
+    @Column(name = "image", length=10000000, nullable = false)
     private String image;
 
     public Image() {
