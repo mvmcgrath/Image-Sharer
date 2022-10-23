@@ -11,21 +11,34 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long imageId;
 
-    @Column(name = "title")
+    @ManyToOne
+    @JoinColumn(name = "userId", nullable = false)
+    private UserDAO user;
+
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "image", length=100000)
+    @Column(name = "image", length=100000, nullable = false)
     private String image;
 
     public Image() {
 
     }
 
-    public Image(long imageId, String title, String image) {
+    public Image(long imageId, UserDAO user, String title, String image) {
         super();
         this.imageId = imageId;
+        this.user = user;
         this.title = title;
         this.image = image;
+    }
+
+    public UserDAO getUser() {
+        return user;
+    }
+
+    public void setUser(UserDAO user) {
+        this.user = user;
     }
 
     public long getImageId() {

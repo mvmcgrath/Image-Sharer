@@ -31,6 +31,14 @@ public class JwtUserDetailsService implements UserDetailsService {
                 new ArrayList<>());
     }
 
+    public UserDAO findUserByUsername(String username) throws UsernameNotFoundException {
+        UserDAO user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found with username: " + username);
+        }
+        return user;
+    }
+
     public UserDAO save(UserDTO user) {
         UserDAO newUser = new UserDAO();
         newUser.setUsername(user.getUsername());

@@ -3,6 +3,7 @@ package com.github.mvmcgrath.server.controller;
 import com.github.mvmcgrath.server.config.JwtTokenUtil;
 import com.github.mvmcgrath.server.model.JwtRequest;
 import com.github.mvmcgrath.server.model.JwtResponse;
+import com.github.mvmcgrath.server.model.UserDAO;
 import com.github.mvmcgrath.server.model.UserDTO;
 import com.github.mvmcgrath.server.service.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,14 +34,13 @@ public class JwtAuthenticationController {
 
     @RequestMapping(value = "/api/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
-
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
-
         final String token = jwtTokenUtil.generateToken(userDetails);
 
-        return ResponseEntity.ok(new JwtResponse(token));
+        final UserDAO user = userDetailsService.findUserByUsername(authenticationRequest.getUsername());
+
+        return ResponseEntity.ok(new JwtResponse(token, user));
     }
 
     @RequestMapping(value = "/api/register", method = RequestMethod.POST)
